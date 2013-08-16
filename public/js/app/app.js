@@ -7,6 +7,4 @@ define([
 
 	preloader.init();
 
-	console.log(arguments);
-
 });

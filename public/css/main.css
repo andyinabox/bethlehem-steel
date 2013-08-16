@@ -28,3 +28,11 @@
 .clearfix {
     *zoom: 1;
 }
+
+img {
+	width: 100%;
+}
+
+video {
+	width: 100%;
+}

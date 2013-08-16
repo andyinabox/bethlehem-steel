@@ -1,12 +1,12 @@
 define([
 	'jquery',
 	'lodash',
-	'pxloader',
-	'pxloader-image',
-	'pxloader-sound',
-	'pxloader-video',
+	'PxLoader',
+	'PxLoaderImage',
+	'PxLoaderSound',
+	'PxLoaderVideo',
 	'config/media',
-], function($, _, PxLoader, PxLoaderImage, PsLoaderSound, PxLoaderVideo, media) {
+], function($, _, PxLoader, PxLoaderImage, PxLoaderSound, PxLoaderVideo, media) {
 	var self = {},
 		_defaults = {},
 		_opts,
@@ -26,9 +26,9 @@ define([
 	function _init(opts) {
 		_opts = _.defaults(_defaults, (opts||{}));
 
-		// _loader = new PxLoader({
+		_loader = new PxLoader({
 
-		// });
+		});
 
 		_(media.images).each(_registerImage);
 		_(media.videos).each(_registerVideo);

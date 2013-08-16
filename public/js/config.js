@@ -21,10 +21,10 @@ require.config({
         jquery: 'lib/jquery/jquery',
         lodash: 'lib/lodash/lodash',
 
-        'pxloader': 'lib/pxloader/PxLoader',
-        'pxloader-image' : 'lib/pxloader/PxLoaderImage',
-        'pxloader-sound' : 'lib/pxloader/PxLoaderSound',
-        'pxloader-video' : 'lib/pxloader/PxLoaderVideo',
+        'PxLoader': 'lib/pxloader/PxLoader',
+        'PxLoaderImage' : 'lib/pxloader/PxLoaderImage',
+        'PxLoaderSound' : 'lib/pxloader/PxLoaderSound',
+        'PxLoaderVideo' : 'lib/pxloader/PxLoaderVideo',
 
         'skrollr': 'lib/skrollr/src/skrollr'
     },
