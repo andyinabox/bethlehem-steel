@@ -94,7 +94,7 @@ define([
 		_loader.addVideo(path, [key, 'videos']);
 
 		$(function(){
-			$vid = $('video[data-mediaid="'+key+'"]');
+			$vid = $('video#'+key);
 			_addSource($vid, path);	
 		})
 	};
@@ -111,7 +111,7 @@ define([
 		_loader.addSound(key, path, [key, 'sounds']);
 
 		$(function(){
-			$snd = $('audio[data-mediaid="'+key+'"]');
+			$snd = $('audio#'+key);
 			_addSource($snd, path);			
 		})
 	};

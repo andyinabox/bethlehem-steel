@@ -2,26 +2,20 @@ define([
 	'jquery',
 	'lodash',
 	'skrollr',
-	'app/preloader'
-], function($, _, skrollr, preloader) {
-
+	'app/preloader',
+	'app/skrollr-media'
+], function($, _, skrollr, preloader, skrollrMedia) {
+	var _skrollr;
 
 	preloader.init().then(function(e){
 		console.log("loaded!", e);
+		
+		_skrollr = skrollr.init();
+		skrollrMedia.init(_skrollr);
+
 		$('#content').show();
 		$('#loading').hide();
 
-
-		$('video').each(function(index, el){
-			console.log('video', el);
-			el.play();
-		});
-
-
-		$('audio').each(function(index, el){
-			console.log('audio', el);
-			el.play();
-		});
 	});
 
 });
