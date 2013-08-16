@@ -72,11 +72,19 @@ define([
 	 */
 	function _registerImage(relativePath, key) {
 		var path = _mediaRoot + relativePath,
+			$bgImg,
 			$img;
 
 		_loader.addImage(path, [key, 'images']);
 
 		$(function(){
+
+			// background image
+			$bgImg = $('.skrollr-bg-image-'+key);
+			$bgImg.css('background-image', 'url("'+path+'")');
+			console.log($bgImg);
+
+			// regular ol images
 			$img = $('img[src="'+relativePath+'"]');
 			$img.attr('src', path);
 		});
