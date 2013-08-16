@@ -5,7 +5,8 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 			startPlaybackAttr : 'start',
 			stopPlaybackAttr : 'stop',
 			startFadeAttr : 'startFadeLength',
-			stopFadeAttr : 'stopFadeLength'
+			stopFadeAttr : 'stopFadeLength',
+			fadeLength : 300
 		},
 		_skrollr,
 		_opts,
@@ -85,9 +86,22 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 				var $this = $(this),
 					start = $this.data(_opts.startPlaybackAttr),
 					stop = $this.data(_opts.stopPlaybackAttr),
-					playing = !audio.paused;
+					startFadeLength = $this.data(_opts.startFadeAttr) || _opts.fadeLength,
+					stopFadeLength = $this.data(_opts.stopFadeAttr) || _opts.fadeLength,
+					playing = !audio.paused,
+					volume = 1;
 
 				if(top >= start && top < stop) {
+
+					if(top < start+startFadeLength) {
+						volume = (top-start) / startFadeLength;
+					} else if (top > stop-stopFadeLength) {
+						volume = (stop-top) / stopFadeLength
+					}
+
+					audio.volume = parseFloat(volume.toFixed(1));
+					console.log('volume',audio.volume, parseFloat(volume.toFixed(2)));
+
 					if(!playing) {
 						audio.play();
 					}

@@ -37,6 +37,8 @@ require.config({
     	'soundmanager2': {
     		exports: 'soundManager'
     	},
-    	'PxLoaderSound': ['soundmanager2']
+      	'PxLoaderImage': ['PxLoader'],
+    	'PxLoaderVideo': ['PxLoader'],
+    	'PxLoaderSound': ['PxLoader', 'soundmanager2']
     }
 });
