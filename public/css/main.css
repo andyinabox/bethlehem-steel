@@ -36,3 +36,16 @@ img {
 video {
 	width: 100%;
 }
+
+#loading {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	padding: auto;
+	background: #000;
+	color: #ddd;
+}
+
+#content {
+	display: none;
+}

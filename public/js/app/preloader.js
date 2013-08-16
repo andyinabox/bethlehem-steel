@@ -5,21 +5,27 @@ define([
 	'PxLoaderImage',
 	'PxLoaderSound',
 	'PxLoaderVideo',
+	'app/soundmanager',
 	'config/media',
-], function($, _, PxLoader, PxLoaderImage, PxLoaderSound, PxLoaderVideo, media) {
+], function($, _, PxLoader, PxLoaderImage, PxLoaderSound, PxLoaderVideo, soundmanager, media) {
 	var self = {},
-		_defaults = {},
+		_defaults = {
+
+		},
 		_opts,
 		
 		_loader,
 
 		// deferreds
 		_initDfd = $.Deferred(),
+		_domReadyDfd = $.Deferred(),
 
 		// media
 		_mediaRoot = media.mediaRoot,
 
 		//jquery
+		_$loading,
+		_$content,
 		_$videoElements,
 		_$audioElements;
 
@@ -30,11 +36,33 @@ define([
 
 		});
 
+		_loader.addCompletionListener(_onAllMediaLoaded);
+		_loader.addProgressListener(_onLoadProgress);
+
 		_(media.images).each(_registerImage);
 		_(media.videos).each(_registerVideo);
-		_(media.sounds).each(_registerSound);
 
-		return _initDfd;
+		// init soundmanager before loading sounds
+		soundmanager.init().then(function(){
+			_(media.sounds).each(_registerSound);
+			_loader.start();		
+		});
+
+		$(_domReady);
+
+		return $.when(_initDfd, _domReadyDfd).promise();
+	};
+
+	function _domReady() {
+		_domReadyDfd.resolve();
+	}
+
+	function _onAllMediaLoaded(e) {
+		_initDfd.resolve(e);
+	}
+
+	function _onLoadProgress(e) {
+		console.log(e.completedCount+' of '+e.totalCount+' items loaded');
 	};
 
 	/**
@@ -45,6 +73,8 @@ define([
 	function _registerImage(relativePath, key) {
 		var path = _mediaRoot + relativePath,
 			$img;
+
+		_loader.addImage(path, [key, 'images']);
 
 		$(function(){
 			$img = $('img[src="'+relativePath+'"]');
@@ -61,6 +91,8 @@ define([
 		var path = _mediaRoot + relativePath,
 			$vid;
 
+		_loader.addVideo(path, [key, 'videos']);
+
 		$(function(){
 			$vid = $('video[data-mediaid="'+key+'"]');
 			_addSource($vid, path);	
@@ -75,6 +107,8 @@ define([
 	function _registerSound(relativePath, key) {
 		var path = _mediaRoot + relativePath,
 			$snd;
+		console.log(path);
+		_loader.addSound(key, path, [key, 'sounds']);
 
 		$(function(){
 			$snd = $('audio[data-mediaid="'+key+'"]');
@@ -93,7 +127,7 @@ define([
 
 		// auto-detect the path from media type
 		if(_.isUndefined(type)) {
-			switch(/\.[0-9a-z]+$/i.exec(path)[0]) {
+			switch(/\.([0-9a-z]+)$/i.exec(path)[1]) {
 				case 'mp4':
 					type = 'video/mp4'
 					break;
@@ -102,10 +136,12 @@ define([
 					break;
 			}
 		}
+		console.log("path", path);
+		console.log("type", type);
 
 		return $('<source>')
 					.attr('src', path)
-					.attr('ty[e', type)
+					.attr('type', type)
 					.appendTo($el);
 	};
 

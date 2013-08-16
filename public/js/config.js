@@ -26,11 +26,17 @@ require.config({
         'PxLoaderSound' : 'lib/pxloader/PxLoaderSound',
         'PxLoaderVideo' : 'lib/pxloader/PxLoaderVideo',
 
+        'soundmanager2' : 'lib/soundmanager2/script/soundmanager2',
+
         'skrollr': 'lib/skrollr/src/skrollr'
     },
     shim: {
     	'skrollr' : {
     		exports: 'skrollr'
-    	}
+    	},
+    	'soundmanager2': {
+    		exports: 'soundManager'
+    	},
+    	'PxLoaderSound': ['soundmanager2']
     }
 });
