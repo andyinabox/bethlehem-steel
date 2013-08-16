@@ -1,0 +1,12 @@
+{
+  "name": "bethlehem-steel",
+  "version": "0.0.1",
+  "dependencies": {
+    "requirejs": "2.1.8",
+    "requirejs-plugins": "~1.0.2",
+    "lodash" : "~1.3.1",
+    "jquery" : "2.0.3",
+    "skrollr" : "0.6.11",
+    "pxloader" : "https://github.com/thinkpixellab/PxLoader/archive/master.zip"
+  }
+}
