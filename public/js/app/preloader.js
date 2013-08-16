@@ -80,7 +80,7 @@ define([
 		$(function(){
 
 			// background image
-			$bgImg = $('.skrollr-bg-image-'+key);
+			$bgImg = $('.image[data-mediaid="'+key+'"]');
 			$bgImg.css('background-image', 'url("'+path+'")');
 			console.log($bgImg);
 
@@ -102,7 +102,7 @@ define([
 		_loader.addVideo(path, [key, 'videos']);
 
 		$(function(){
-			$vid = $('video#'+key);
+			$vid = $('video[data-mediaid="'+key+'"]');
 			_addSource($vid, path);	
 		})
 	};
@@ -119,7 +119,7 @@ define([
 		_loader.addSound(key, path, [key, 'sounds']);
 
 		$(function(){
-			$snd = $('audio#'+key);
+			$snd = $('audio[data-mediaid="'+key+'"]');
 			_addSource($snd, path);			
 		})
 	};
