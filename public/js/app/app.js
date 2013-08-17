@@ -16,17 +16,24 @@ define([
 	
 	});
 
+	_m.subscribe('skrollrMedia:play', function(id, volume) {
+		dev.log(id + ' playing at volume '+volume)
+	})
+
+	_m.subscribe('skrollrMedia:pause', function(id, volume) {
+		dev.log(id + ' paused at volume '+volume)
+	})
+
 	preloader.init({},_m).then(function(e){
-		console.log("loaded!", e);
-		
+
 		$('.fullscreen').height($(window).height());
+		$('#textlayer').css('top',$(window).height());
 		_skrollr = skrollr.init();
 		dev.setSkrollr(_skrollr);
 		skrollrMedia.init(_skrollr, {}, _m);
 
 		$('#content').show();
 		$('#loading').hide();
-
 	});
 
 });

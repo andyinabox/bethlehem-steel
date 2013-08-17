@@ -1,4 +1,4 @@
-define(['jquery','lodash','mediator-js'], function($, _, mediator) {
+define(['jquery','lodash','mediator-js', 'app/requestAnimationFrame'], function($, _, mediator, requestAnimationFrame) {
 
 	var self = {},
 		_defaults = {
@@ -18,20 +18,19 @@ define(['jquery','lodash','mediator-js'], function($, _, mediator) {
 		_enabled = _checkEnabled();
 
 		if(_enabled) {
-			window.DEV = self;
+			window.devtools = self;
 			_showDevDisplay();
 			_mediator.subscribe('preloader:progress', _onPreloaderProgress);
 			_mediator.subscribe('preloader:complete', _onPreloaderComplete);
-
 		}
 	};
 
 	function _onPreloaderProgress(e) {
-		_showMessage(e.resource.getName()+' loaded ('+e.completedCount+'/'+e.totalCount+')');
+		_log(e.resource.getName()+' loaded ('+e.completedCount+'/'+e.totalCount+')');
 	}
 
 	function _onPreloaderComplete(e) {
-		window.setTimeout(_showMessage, 100, 'All media loaded');
+		window.setTimeout(_log, 0, 'All media loaded');
 	}
 
 	function _setSkrollr(skrollr) {
@@ -39,13 +38,13 @@ define(['jquery','lodash','mediator-js'], function($, _, mediator) {
 			_skrollr = skrollr;
 
 			(function animloop(){
-				_$devbar.find('.position').html(_skrollr.getScrollTop());
+				_$devbar.find('.position').html(parseInt(_skrollr.getScrollTop()));
 				window.requestAnimationFrame(animloop);
 			}());
 		}
 	}
 
-	function _showMessage(message) {
+	function _log(message) {
 		if(_enabled && _.isString(message)) {
 			_$devbar.find('.message').html(message);
 		}
@@ -55,7 +54,7 @@ define(['jquery','lodash','mediator-js'], function($, _, mediator) {
 		console.log("------- DEV MODE -------");
 		$('body').append('<div id="devbar"><span class="position">#</span><span class="message"></span></div>')
 		_$devbar = $('#devbar');
-		_showMessage(_opts.initMessage);
+		_log(_opts.initMessage);
 	};
 
 	function _checkEnabled() {
@@ -75,6 +74,6 @@ define(['jquery','lodash','mediator-js'], function($, _, mediator) {
 
 	self.init = _init;
 	self.setSkrollr = _setSkrollr;
-	self.showMessage = _showMessage;
+	self.showMessage = self.log = _log;
 	return self;
 });

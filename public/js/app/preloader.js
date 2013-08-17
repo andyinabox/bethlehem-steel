@@ -62,8 +62,8 @@ define([
 	}
 
 	function _onAllMediaLoaded(e) {
-		_initDfd.resolve(e);
 		_mediator.publish('preloader:complete', e);
+		_initDfd.resolve(e);
 	}
 
 	function _onLoadProgress(e) {
@@ -87,7 +87,6 @@ define([
 			// background image
 			$bgImg = $('.image[data-mediaid="'+key+'"]');
 			$bgImg.css('background-image', 'url("'+path+'")');
-			console.log($bgImg);
 
 			// regular ol images
 			$img = $('img[src="'+relativePath+'"]');
@@ -103,8 +102,9 @@ define([
 	function _registerVideo(relativePath, key) {
 		var path = _mediaRoot + relativePath,
 			$vid;
-
-		_loader.addVideo(path, [key, 'videos']);
+		if(!/Safari/.test(navigator.userAgent || navigator.vendor || window.opera)) {
+			_loader.addVideo(path, [key, 'videos']);
+		}
 
 		$(function(){
 			$vid = $('video[data-mediaid="'+key+'"]');
@@ -149,8 +149,6 @@ define([
 					break;
 			}
 		}
-		console.log("path", path);
-		console.log("type", type);
 
 		return $('<source>')
 					.attr('src', path)

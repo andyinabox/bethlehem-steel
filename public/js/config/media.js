@@ -1,11 +1,12 @@
 define({
+	// "mediaRoot" : "http://dl.dropboxusercontent.com/u/2100102/bethlehem/",
 	"mediaRoot" : "../localMedia/",
 	"sounds" : {
 		"Richie_WelfareRoom" : "sounds/Richie_WelfareRoom.mp3",
 		// "2200_DEGREES_Music_Stories" : "sounds/2200_DEGREES_Music_Stories.mp3",
 		// "FAMILYHISTORY" : "sounds/FAMILYHISTORY.mp3",
 		// "fortification_mmroughcutJE" : "sounds/fortification_mmroughcutJE.mp3",
-		// "list_of_Stuff_made_at_Steel" : "sounds/list_of_Stuff_made_at_Steel.mp3",
+		"list_of_Stuff_made_at_Steel" : "sounds/list_of_Stuff_made_at_Steel.mp3",
 		// "Ritchie001_Zen_Story" : "sounds/Ritchie001_Zen_Story.mp3",
 		// "sodabottles" : "sounds/sodabottles.mp3",
 		// "Steel_Ambient_Sounds" : "sounds/Steel_Ambient_Sounds.mp3",
@@ -25,6 +26,8 @@ define({
 		// "disc3" : "images/disc3.jpg",
 		// "green" : "images/green.jpg",
 		// "phone" : "images/phone.jpg",
-		// "pillars1" : "images/pillars1.jpg"
+		"pillars1" : "images/pillars1.jpg",
+		"pods" : "images/pods.jpg",
+		// "snowy-exterior" : "images/snowy-exterior.jpg",
 	}
 });

@@ -17,36 +17,69 @@
 
     <div id="wrapper">
 
-    <div id="loading">
-      <h1>Loading</h1>
-    </div>
-
-    <div id="content">
-
-
-      <audio data-mediaid="Steel_Music_From_3MinFilm" data-start="0" data-startfadelength="0" data-stop="4000">
-        <div class="audio-caption">Here's a caption for this audio.</div>
-      </audio>
-
-      <!-- <img src="images/tower.jpg" data-0="opacity:0;" data-300="opacity:1;"> -->
-      <div class="fullscreen spacer"></div>
-<!--       <div data-0="opacity:0;" data-300="opacity:1;" class="skrollr-bg-image-tower fullscreen"></div> -->
-        <div data-mediaid="tower" class="image cover-bg" style="height:500px;"  data-0="opacity:0;background-position:center -200px" data-500="opacity:1;background-position:center 0" ></div>
-
-      <div class="video-container" style="height:700px;">
-        <video data-mediaid="Time_Lapse_Clip_Film" data-0="top:-100px;" data-1000="top:0" data-start="500" data-stop="2000" loop></video>
+      <div id="loading">
+        <h1>Loading</h1>
       </div>
 
-      <audio data-mediaid="Richie_WelfareRoom" data-start="300" data-stop="2000">
-        <div class="audio-caption">Here's a caption for this audio.</div>
-      </audio>
+      <div id="content">
 
-      <div data-mediaid="tower" class="image cover-bg" style="height:700px; background-position: center center"  data-1000="opacity:1;background-size: 100%;" data-2500="opacity:1;background-size: 120%;" ></div>
+        <div id="mainlayer">
 
-      <div class="video-container" style="height:700px;">
-        <video data-mediaid="Glove_to_wide" data-0="top:-100px;" data-1000="top:0" data-start="2000" data-stop="3500" loop></video>
-      </div>
-    </div>
+          <audio data-mediaid="Steel_Music_From_3MinFilm" data-startmedia="0" data-startfadelength="0" data-stopmedia="2400" data-maxvolume="0.5">
+            <div class="audio-caption">Here's a caption for this audio.</div>
+          </audio>
+
+          <div class="fullscreen spacer"></div>
+
+          <div data-mediaid="tower" class="image cover-bg" style="height:500px;"  data-0="opacity:0;background-position:center -200px" data-500="opacity:1;background-position:center 0" ></div>
+
+          <div class="video-container" style="height:700px;">
+            <video data-mediaid="Time_Lapse_Clip_Film" data-0="top:-100px;" data-1000="top:0" data-startmedia="500" data-stopmedia="2000" loop></video>
+          </div>
+
+          <audio data-mediaid="list_of_Stuff_made_at_Steel" data-startmedia="300" data-stopmedia="3000">
+            <div class="audio-caption">Here's a caption for this audio.</div>
+          </audio>
+
+          <div data-mediaid="pillars1" class="image cover-bg" style="height:700px; background-position: center center"  data-1000="opacity:1;background-size: 100%;" data-2500="opacity:1;background-size: 120%;" ></div>
+
+          <div class="video-container" style="height:700px;">
+            <video data-mediaid="Glove_to_wide" data-0="top:-100px;" data-1000="top:0" data-startmedia="2000" data-stopmedia="3500" loop></video>
+          </div>
+
+          <audio data-mediaid="Richie_WelfareRoom" data-startmedia="2400" data-stopmedia="5000">
+            <div class="audio-caption">Here's a caption for this audio.</div>
+          </audio>
+
+          <div data-mediaid="pods" class="image cover-bg" style="height: 700px; background-position: center center;" data-2600="opacity:0;background-size: 100%;" data-3500="opacity:1;background-size: 120%;" ></div>
+
+          <div class="video-container" style="height:700px;">
+            <video data-mediaid="Film_no_Audio_grass_and_steel_02" data-0="top:-100px;" data-4000="top:0" data-startmedia="3000" data-stopmedia="4500" loop></video>
+          </div>
+
+        </div>
+
+        <div id="textlayer">
+          <div id="textlayer-shim" data-start="top:300px;" data-end="top:-300px;">
+            <div style="position:absolute;top:700px;" class="text-overlay"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div>
+
+          <div id="textlayer-shim" data-start="top:300px;" data-end="top:-300px;">
+            <div style="position:absolute;top:1200px;" class="text-overlay"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div>
+       </div>
 
     </div>
 

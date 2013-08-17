@@ -1,9 +1,15 @@
-define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, mediator) {
+define([
+	'jquery',
+	'lodash',
+	'skrollr',
+	'mediator-js',
+	'app/requestAnimationFrame'
+], function($, _, skrollr, mediator, requestAnimationFrame) {
 	var self = {},
 		_defaults = {
 			// data attributes
-			startPlaybackAttr : 'start',
-			stopPlaybackAttr : 'stop',
+			startPlaybackAttr : 'startmedia',
+			stopPlaybackAttr : 'stopmedia',
 			startFadeAttr : 'startfadelength',
 			stopFadeAttr : 'stopfadelength',
 			maxVolumeAttr : 'maxvolume',
@@ -32,7 +38,6 @@ define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, m
 		})());
 
 	function _init(skrollrInstance, opts, mediator) {
-		var requestAnimFrame;
 
 		// set skrollr instance
 		if(skrollrInstance) {
@@ -50,14 +55,10 @@ define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, m
 		// dom ready
 		$(_domReady);
 
-		// get RAF polyfill if necessary
-		requestAnimFrame = _polyfillRAF();
-
-
 		//Let's go.
 		(function animloop(){
 			_render();
-			requestAnimFrame(animloop);
+			requestAnimationFrame(animloop);
 		}());
 	}
 
@@ -93,7 +94,7 @@ define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, m
 	 */
 	function _handleMediaPlayback(top, el, type) {
 				var $el = $(el),
-					id = $el.data('mediaid') 
+					id = $el.data('mediaid'),
 					start = $el.data(_opts.startPlaybackAttr),
 					stop = $el.data(_opts.stopPlaybackAttr),
 					startFadeLength = $el.data(_opts.startFadeAttr),
@@ -101,13 +102,16 @@ define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, m
 					maxVolume = $el.data(_opts.maxVolumeAttr),
 					minVolume = $el.data(_opts.minVolumeAttr),
 					playing = !el.paused,
-					volume = 1;
+					volume;
 
 				// use defaults if not defined w/ data attributes
+				stop = _.isFinite(stop) ? stop : top+1000; // no end
 				startFadeLength = _.isFinite(startFadeLength) ? startFadeLength : _opts.fadeLength;
 				stopFadeLength = _.isFinite(stopFadeLength) ? stopFadeLength : _opts.fadeLength;
 				maxVolume = _.isFinite(maxVolume) ? maxVolume : _opts.maxVolume;
 				minVolume = _.isFinite(minVolume) ? minVolume : _opts.minVolume;
+
+				volume = maxVolume;
 
 				if(top >= start && top < stop) {
 
@@ -119,6 +123,7 @@ define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, m
 						volume = (((stop-top) / stopFadeLength)*(maxVolume-minVolume))+minVolume;
 					}
 
+					// console.log(id, volume);
 					el.volume = parseFloat(volume.toFixed(1));
 
 					if(!playing) {
@@ -130,32 +135,6 @@ define(['jquery', 'lodash', 'skrollr', 'mediator-js'], function($, _, skrollr, m
 					el.pause();
 				}
 	}
-
-	/**
-	 * Copped this one directly from skrollr
-	 * @return {object} requestAnimationFrame object or polyfill
-	 */
-	function _polyfillRAF() {
-		var requestAnimFrame = window.requestAnimationFrame || window[theCSSPrefix.toLowerCase() + 'RequestAnimationFrame'];
-
-		var lastTime = _now();
-
-		if(_isMobile || !requestAnimFrame) {
-			requestAnimFrame = function(callback) {
-				//How long did it take to render?
-				var deltaTime = _now() - lastTime;
-				var delay = Math.max(0, 1000 / 60 - deltaTime);
-
-				window.setTimeout(function() {
-					lastTime = _now();
-					callback();
-				}, delay);
-			};
-		}
-
-		return requestAnimFrame;
-	};
-
 
 	self.init = _init;
 	self.mute = function(bool) {
