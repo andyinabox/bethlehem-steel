@@ -83,3 +83,34 @@ video {
 	display: none;
 	background: #000;
 }
+
+
+#devbar {
+	position: fixed;
+	z-index: 9999;
+	opacity: 0.8;
+	bottom: 0;
+	height: 30px;
+	left: 0px;
+	right: 0px;
+	background: #000;
+	color: #fff;
+	font-family: "Courier", monospace;
+}
+#devbar .position {
+	display: block;
+	float: left;
+	text-align: center;
+	padding: 0 .5em;
+	line-height: 30px;
+	height: 30px;
+	background: #333;
+	color: #fff;
+	min-width: 50px;
+}
+
+#devbar .message {
+	line-height: 30px;
+	height: 30px;
+	padding: 0 .5em;
+}

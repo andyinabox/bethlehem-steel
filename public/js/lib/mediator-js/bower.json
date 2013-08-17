@@ -1,0 +1,8 @@
+{
+  "name": "mediator-js",
+  "version": "0.9.5",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ajacksified/Mediator.js.git"
+  }
+}

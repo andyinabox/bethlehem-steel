@@ -20,6 +20,8 @@ require.config({
         /* libraries */
         jquery: 'lib/jquery/jquery',
         lodash: 'lib/lodash/lodash',
+        'mediator-js': 'lib/mediator-js/lib/mediator',
+
 
         'PxLoader': 'lib/pxloader/PxLoader',
         'PxLoaderImage' : 'lib/pxloader/PxLoaderImage',

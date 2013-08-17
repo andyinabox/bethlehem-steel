@@ -1,20 +1,21 @@
 define([
 	'jquery',
 	'lodash',
+	'mediator-js',
 	'PxLoader',
 	'PxLoaderImage',
 	'PxLoaderSound',
 	'PxLoaderVideo',
 	'app/soundmanager',
 	'config/media',
-], function($, _, PxLoader, PxLoaderImage, PxLoaderSound, PxLoaderVideo, soundmanager, media) {
+], function($, _, mediator, PxLoader, PxLoaderImage, PxLoaderSound, PxLoaderVideo, soundmanager, media) {
 	var self = {},
 		_defaults = {
-
 		},
 		_opts,
 		
 		_loader,
+		_mediator,
 
 		// deferreds
 		_initDfd = $.Deferred(),
@@ -29,12 +30,15 @@ define([
 		_$videoElements,
 		_$audioElements;
 
-	function _init(opts) {
+	function _init(opts, mediator) {
 		_opts = _.defaults(_defaults, (opts||{}));
+
+		_mediator = mediator || new Mediator();
 
 		_loader = new PxLoader({
 
 		});
+
 
 		_loader.addCompletionListener(_onAllMediaLoaded);
 		_loader.addProgressListener(_onLoadProgress);
@@ -59,10 +63,11 @@ define([
 
 	function _onAllMediaLoaded(e) {
 		_initDfd.resolve(e);
+		_mediator.publish('preloader:complete', e);
 	}
 
 	function _onLoadProgress(e) {
-		console.log(e.completedCount+' of '+e.totalCount+' items loaded');
+		_mediator.publish('preloader:progress', e)
 	};
 
 	/**
