@@ -76,7 +76,7 @@ define([
 	 * @param  {string} key
 	 */
 	function _registerImage(relativePath, key) {
-		var path = _mediaRoot + relativePath,
+		var path = _getPath(_mediaRoot, relativePath),
 			$bgImg,
 			$img;
 
@@ -100,7 +100,7 @@ define([
 	 * @param  {string} key
 	 */
 	function _registerVideo(relativePath, key) {
-		var path = _mediaRoot + relativePath,
+		var path = _getPath(_mediaRoot, relativePath),
 			$vid;
 		if(!/Safari/.test(navigator.userAgent || navigator.vendor || window.opera)) {
 			_loader.addVideo(path, [key, 'videos']);
@@ -118,10 +118,10 @@ define([
 	 * @param  {string} key
 	 */
 	function _registerSound(relativePath, key) {
-		var path = _mediaRoot + relativePath,
+		var path = _getPath(_mediaRoot, relativePath),
 			$snd;
 		console.log(path);
-		_loader.addSound(key, path, [key, 'sounds']);
+		// _loader.addSound(key, path, [key, 'sounds']);
 
 		$(function(){
 			$snd = $('audio[data-mediaid="'+key+'"]');
@@ -155,6 +155,10 @@ define([
 					.attr('type', type)
 					.appendTo($el);
 	};
+
+	function _getPath(root, relativePath) {
+		return root + relativePath;
+	}
 
 	self.init = _init;
 
