@@ -1,7 +1,7 @@
 define({
 	// "mediaRoot" : "http://dl.dropboxusercontent.com/u/2100102/bethlehem/",
-	"mediaRoot" : "https://s3.amazonaws.com/bethlehem/",
-	// "mediaRoot" : "../localMedia/",
+	// "mediaRoot" : "https://s3.amazonaws.com/bethlehem/",
+	"mediaRoot" : "../localMedia/",
 	"sounds" : {
 		"Richie_WelfareRoom" : "sounds/Richie_WelfareRoom.mp3",
 		// "2200_DEGREES_Music_Stories" : "sounds/2200_DEGREES_Music_Stories.mp3",
@@ -30,6 +30,7 @@ define({
 		"pillars1" : "images/pillars1.jpg",
 		"pods" : "images/pods.jpg",
 		"snowy-exterior" : "images/snowy-exterior.jpg",
+		"illustration-white" : "images/illustration-white.png"
 	}
 });
 
