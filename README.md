@@ -36,7 +36,7 @@ define({
 		"karaokeTime" : "sounds/karaokeTime.mp3"
 	},
 
-	// Sound files. Currently m4v files are supported, 
+	// Video files. Currently m4v files are supported, 
 	// placed in the "videos" folder.
 	"videos" : {
 		"catSinging" : "videos/catSinging.mp4"
