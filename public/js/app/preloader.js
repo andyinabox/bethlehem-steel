@@ -82,6 +82,7 @@ define([
 
 	function _domReady() {
 
+
 		_(_loader.images).each(_applyImage);
 		_(_loader.videos).each(_applyVideo);
 		_(_loader.sounds).each(_applySound);
@@ -112,14 +113,17 @@ define([
 
 	function _preloadVideo(relativePath, key) {
 		var dfd = $.Deferred(),
-			$vid = $('video'),
+			$vid = $('<video>'),
 			path = _getPath(_mediaRoot, relativePath);
+
 
 		// set up preloading
 		$vid.on('canplaythrough', dfd.resolve);
 		$vid.attr('src', path);
 		$vid.get(0).load();
 		_loader.videos[key] = _formatPreloaderObject(path, dfd);
+
+		console.log($vid);
 
 		// event callbacks
 		dfd.then(_onVideosProgress);
@@ -130,14 +134,14 @@ define([
 
 	function _preloadSound(relativePath, key) {
 		var dfd = $.Deferred(),
-			$snd = $('audio'),
+			$snd = $('<audio>'),
 			path = _getPath(_mediaRoot, relativePath);
 
 		// set up preloading
 		$snd.on('canplaythrough', dfd.resolve);
 		$snd.attr('src', path);
 		$snd.get(0).load();
-		_loader.videos[key] = _formatPreloaderObject(path, dfd);
+		_loader.sounds[key] = _formatPreloaderObject(path, dfd);
 
 		// event callbacks
 		dfd.then(_onSoundsProgress);
@@ -191,7 +195,8 @@ define([
 	 * @param {string} type
 	 */
 	function _addMediaSourceElement($el, path, type) {
-		var type;
+		var type,
+			$source;
 
 		// auto-detect the path from media type
 		if(_.isUndefined(type)) {
@@ -205,10 +210,12 @@ define([
 			}
 		}
 
-		return $('<source>')
+		$source = $('<source>')
 					.attr('src', path)
 					.attr('type', type)
 					.appendTo($el);
+
+		return $source;
 	};
 
 	function _formatPreloaderObject(path, dfd) {
