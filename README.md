@@ -86,7 +86,7 @@ On page load is converted to:
 
 ```html
 <video data-mediaid="catSinging" data-startmedia="0">
-	<source src="../localMedia/videos/karaokeTime.mp3" type="video/mpeg">
+	<source src="../localMedia/videos/karaokeTime.mp3" type="audio/mpeg">
 </video>
 
 ```
