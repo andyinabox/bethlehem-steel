@@ -10,13 +10,120 @@ Most of what you need to know for the scrolling
 
 ### Dev mode
 
-To enable "dev mode" that allows you to view the current scroll position and various event logs (loading, media playback, etc.), simply add `?dev=1` to the end of `index.html` in your browser window. For example:
+To enable "dev mode" that allows you to view the current scroll position and various event logs (loading, media playback, etc.), simply add `?dev=1` to the end of `index.html` in your browser location bar. For example:
 
 	file:///Users/[username]/Sites/bethlehem-steel/public/index.html?dev=1
 
 ### Media Asset Loading
 
-Set the assets and the asset root in the [media.js](public/js/config/media.js) configuration file.
+Set the assets and the asset root in the [media.js](public/js/config/media.js) configuration file. For local development, you can put a directory in the root of the project called `mediaAssets` and it will automatically be ignored by Git. An example local development file:
+
+```js
+define({
+
+	// This sets the root for all of our media. It allows us
+	// to develop locally and then upload the files somewhere
+	// else and then change the root without having to 
+	// change all of our configuration.
+	"mediaRoot" : "../localMedia/",
+
+	// Sound files. Currently only mp3s are supported, and
+	// all sounds are stored in the "sounds" directory 
+	// inside the media root.
+	"sounds" : {
+		"karaokeTime" : "sounds/karaokeTime.mp3"
+	},
+
+	// Sound files. Currently m4v files are supported, 
+	// placed in the "videos" folder.
+	"videos" : {
+		"catSinging" : "videos/catSinging.mp4"
+	},
+
+	// Image files. Can be pretty much any type of image
+	// supported by browsers, including jpg, png, and gif.
+	// Stored in the "images" directory.
+	"images" : {
+		"catSinging" : "images/catSinging.gif",
+		"chzburger" : "images/chzburger.jpg"
+	}
+
+});
+
+```
+
+Assets will be automatically added to any media elements in the [index.html](public/index.html) file if you assign a `data-mediaid` attribute that corresponds to an identifier in the [media.js](public/js/config/media.js). See examples below:
+
+#### Videos
+
+When you set the `data-mediaid` attribute to a `<video>` element, it will automatically look in the `images` object within the [media.js](public/js/config/media.js) configuration and grab the correct path.
+
+For instance, the following html will automagically know to load in the "catSinging" video and not the "gatSinging" image":
+
+```html
+<video data-mediaid="catSinging" data-startmedia="0"></video>
+```
+
+And so when the page loads it will become this behind the scenes:
+
+```html
+<video data-mediaid="catSinging" data-startmedia="0">
+	<source src="../localMedia/videos/catSinging.mp4" type="video/mp4">
+</video>
+```
+
+#### Audio
+
+The same behavior applies to `<audio>` elements:
+
+```html
+<video data-mediaid="karaokeTime" data-startmedia="0"></video>
+```
+
+On page load is converted to:
+
+```html
+<video data-mediaid="catSinging" data-startmedia="0">
+	<source src="../localMedia/videos/karaokeTime.mp3" type="video/mpeg">
+</video>
+
+```
+
+#### Images
+
+There are two ways to include images from [media.js](public/js/config/media.js):
+
+1. Using an `<img>` element (the simple, old-fashioned way)
+2. Using the `data-mediaid` attribute on a block-level element with the class `image`, which will add the image using the css `background-image` attribute.
+
+##### The `<img>` method
+
+This method is fairly straightforward. If you use the image's relative path in the `src` attribute of an image element:
+
+```html
+<img src="images/chzburger.jpg">
+```
+
+It will automatically get changed to the full path:
+
+```html
+<img src="../localMedia/images/chzburger.jpg">
+```
+
+##### The `data-mediaid` method
+
+This works very similar to the `<video>` and `<audio>` method; if you include a `data-mediaid` attribute that contains the image identifier and add the `image` class to the element, the `background-image` css property will be automagically set:
+
+```html
+<div data-mediaid="chzburger" class="image"></div>
+```
+
+Becomes
+
+```html
+<div data-mediaid="chzburger" class="image" style="background-image:url('../localMedia/images/chzburger.jpg');"></div>
+```
+
 
 ### Media Controls
 
