@@ -29,6 +29,11 @@ define([
 			sounds: {}
 		},
 
+		_imagesLoaded = 0,
+		_videosLoaded = 0,
+		_soundsLoaded = 0,
+		_totalLoaded = 0,
+
 		_events = {
 			start: 'preloader:start',
 			progress: 'preloader:progress',
@@ -49,14 +54,14 @@ define([
 		_mediator = mediator || new Mediator();
 
 		// set up preloading
-		_(media.images).each(_preloadImage);
-		_(media.videos).each(_preloadVideo);
-		_(media.sounds).each(_preloadSound);
+		_(media.images).each(_registerImage);
+		_(media.videos).each(_registerVideo);
+		_(media.sounds).each(_registerSound);
 
 		// set up deferred objects
-		_imagesDfd = $.when.apply($, _.pluck(_loader.images, 'promise'));
-		_videosDfd = $.when.apply($, _.pluck(_loader.videos, 'promise'));
-		_soundsDfd = $.when.apply($, _.pluck(_loader.sounds, 'promise'));
+		_imagesDfd = $.when.apply($, _.pluck(_loader.images, 'dfd'));
+		_videosDfd = $.when.apply($, _.pluck(_loader.videos, 'dfd'));
+		_soundsDfd = $.when.apply($, _.pluck(_loader.sounds, 'dfd'));
 		_allCompleteDfd = $.when(
 			_imagesDfd,
 			_videosDfd,
@@ -64,15 +69,15 @@ define([
 			_domReadyDfd
 		);
 
-		// dom ready
-		$(_domReady);
 
 		// set up event methods
 		_allCompleteDfd.then(_onAllComplete);
-		_imagesDfd.then(_onImagesComplete);
-		_imagesDfd.then(_onVideosComplete);
-		_imagesDfd.then(_onVideosComplete);
+		_imagesDfd.then(_onImagesComplete());
+		_videosDfd.then(_onVideosComplete());
+		_soundsDfd.then(_onSoundsComplete());
 
+		// dom ready
+		$(_domReady);
 
 		// fire start event
 		_mediator.publish(_events.start);
@@ -82,7 +87,6 @@ define([
 
 	function _domReady() {
 
-
 		_(_loader.images).each(_applyImage);
 		_(_loader.videos).each(_applyVideo);
 		_(_loader.sounds).each(_applySound);
@@ -90,62 +94,79 @@ define([
 		_domReadyDfd.resolve();
 	}
 
+
 	/*
-	 * PRELOAD METHODS 
+	 * REGISTRATION METHODS 
 	 */
 
 
-	function _preloadImage(relativePath, key) {
+	function _registerImage(relativePath, key) {
 		var dfd = $.Deferred(),
-			img = new Image(),
+			$img = $('<img>'),
 			path = _getPath(_mediaRoot, relativePath);
 
 		// set up preloading
-		$(img).load(dfd.resolve);
-		img.src = path;
+		$img.load(dfd.resolve);
+		$img.attr('src', path);
 		_loader.images[key] = _formatPreloaderObject(path, dfd);
 
-		dfd.then(_onImagesProgress);
-		dfd.then(_onAllProgress);
+		dfd.done(
+			function(){
+				_imagesLoaded++;
+				_totalLoaded++;
+				_onImagesProgress(key, path,  _imagesLoaded, _.size(_loader.images));
+			}
+		);
 
 		return dfd.promise();
 	}
 
-	function _preloadVideo(relativePath, key) {
+	function _registerVideo(relativePath, key) {
 		var dfd = $.Deferred(),
-			$vid = $('<video>'),
+			// $vid = $('<video>'),
 			path = _getPath(_mediaRoot, relativePath);
 
 
 		// set up preloading
-		$vid.on('canplaythrough', dfd.resolve);
-		$vid.attr('src', path);
-		$vid.get(0).load();
+		// $vid.on('canplaythrough', dfd.resolve);
+		// $vid.attr('preload', 'auto');
+
+		// $vid.attr('src', path);
+		// $vid.get(0).load();
 		_loader.videos[key] = _formatPreloaderObject(path, dfd);
 
-		console.log($vid);
-
 		// event callbacks
-		dfd.then(_onVideosProgress);
-		dfd.then(_onAllProgress);
+		dfd.done(
+			function(){
+				_videosLoaded++;
+				_totalLoaded++;
+				_onVideosProgress(key, path, _videosLoaded, _.size(_loader.videos));
+			}
+		);
 
 		return dfd.promise();
 	}
 
-	function _preloadSound(relativePath, key) {
+	function _registerSound(relativePath, key) {
 		var dfd = $.Deferred(),
 			$snd = $('<audio>'),
 			path = _getPath(_mediaRoot, relativePath);
 
 		// set up preloading
 		$snd.on('canplaythrough', dfd.resolve);
-		$snd.attr('src', path);
-		$snd.get(0).load();
-		_loader.sounds[key] = _formatPreloaderObject(path, dfd);
+		$snd.attr('preload', 'auto');
+		// $snd.attr('src', path);
+		// $snd.get(0).load();
+		_loader.sounds[key] = _formatPreloaderObject(path, dfd, $snd.get(0));
 
 		// event callbacks
-		dfd.then(_onSoundsProgress);
-		dfd.then(_onAllProgress);
+		dfd.done(
+			function(){
+				_soundsLoaded++;
+				_totalLoaded++;
+				_onSoundsProgress(key, path, _soundsLoaded, _.size(_loader.sounds));
+			}
+		);
 
 		return dfd.promise();
 	}
@@ -173,6 +194,14 @@ define([
 			vidSel = 'video[data-mediaid="'+key+'"]',
 			$vid = $(vidSel);
 
+
+		if($vid.length < 1) {
+			$vid = $('<audio>');
+		}
+
+		$vid.attr('preload', 'auto');
+		$vid.on('canplaythrough', preloader.dfd.resolve);
+
 		_addMediaSourceElement($vid, path);		
 	}
 
@@ -180,6 +209,13 @@ define([
 		var path = preloader.path,
 			sndSel = 'audio[data-mediaid="'+key+'"]',
 			$snd = $(sndSel);
+
+		if($snd.length < 1) {
+			$snd = $('<audio>');
+		}
+
+		$snd.attr('preload', 'auto');
+		$snd.on('canplaythrough', preloader.dfd.resolve);
 
 		_addMediaSourceElement($snd, path);		
 	}
@@ -221,12 +257,62 @@ define([
 	function _formatPreloaderObject(path, dfd) {
 		return {
 			path: path,
-			promise: dfd.promise()
+			dfd: dfd
 		}
 	}
 
+
 	function _getPath(root, relativePath) {
 		return root + relativePath;
+	}
+
+	function _formatProgressEventObject(key, path, completed, count, type) {
+		return {
+			key: key,
+			path: path,
+			completed: completed,
+			count: count,
+			type: type,
+			timestamp: (new Date()).getTime(),
+			allTypes: {
+				total: _getTotalLoadedCount(),
+				count: _getTotalMediaCount()
+			}
+		}
+	}
+
+	function _formatCompletedEventObject(types) {
+		var eventObj = {};
+
+		_(types).each(function(type){
+			if(_.has(_loader, type)) {
+				eventObj[type] = _.map(_loader[type], function(value, key, list){
+					return {
+						key: key,
+						path: value.path,
+						status: value.dfd.state()
+					}
+				});
+			}
+		});
+
+		eventObj.timestamp = (new Date()).getTime()
+
+		return eventObj;
+
+ 	}
+
+
+	function _getTotalMediaCount() {
+		var total = 0;
+		total += _.size(_loader.images);
+		total += _.size(_loader.videos);
+		total += _.size(_loader.sounds);
+		return total;
+	}
+
+	function _getTotalLoadedCount() {
+		return _totalLoaded;
 	}
 
 	/*
@@ -235,31 +321,39 @@ define([
 
 	// complete events
 	function _onAllComplete() {
-		_mediator.publish(_events.complete, arguments);
+		_mediator.publish(_events.complete, _formatCompletedEventObject(['images', 'videos', 'sounds']));
 	}
 	function _onImagesComplete() {
-		_mediator.publish(_events.imagesComplete, arguments);
+		_mediator.publish(_events.imagesComplete, _formatCompletedEventObject(['images']));
 	}
 	function _onVideosComplete() {
-		_mediator.publish(_events.videosComplete, arguments);		
+		_mediator.publish(_events.videosComplete, _formatCompletedEventObject(['videos']));		
 	}
 	function _onSoundsComplete() {
-		_mediator.publish(_events.soundsComplete, arguments);				
+		_mediator.publish(_events.soundsComplete, _formatCompletedEventObject(['sounds']));				
 	}
 
-	//progress events
-	function _onAllProgress() {
-		_mediator.publish(_events.progress, arguments);		
+
+
+
+	function _onImagesProgress(key, path, completed, count) {
+		var evt = _formatProgressEventObject(key, path, completed, count, 'image');
+		_mediator.publish(_events.imagesProgress, evt);
+		_mediator.publish(_events.progress, evt);			
 	}
-	function _onImagesProgress() {
-		_mediator.publish(_events.imagesProgress, arguments);				
+
+	function _onVideosProgress(key, path, completed, count) {
+		var evt = _formatProgressEventObject(key, path, completed, count, 'video');
+		_mediator.publish(_events.videosProgress, evt);
+		_mediator.publish(_events.progress, evt);		
 	}
-	function _onVideosProgress() {
-		_mediator.publish(_events.videosProgress, arguments);				
+
+	function _onSoundsProgress(key, path, completed, count) {
+		var evt = _formatProgressEventObject(key, path, completed, count, 'sound');
+		_mediator.publish(_events.soundsProgress, evt);
+		_mediator.publish(_events.progress, evt);
 	}
-	function _onSoundsProgress() {
-		_mediator.publish(_events.soundsProgress, arguments);				
-	}
+
 
 	self.init = _init;
 

@@ -27,8 +27,12 @@ define([
 	// testing out preloader events
 	_(preloader.getEvents()).each(function(channel, index){
 		console.log('registering preloader channel "'+channel+'"');
-		_m.subscribe(channel, function() {
-			console.log('event channel "'+channel+'" triggered with args ', arguments);
+		_m.subscribe(channel, function(evt, ch) {
+			if(evt && evt.key) {
+				console.log('loaded '+evt.type+' '+evt.key+' ('+evt.completed+'/'+evt.count+')');
+			} else {
+				console.log('event channel "'+channel+'" triggered with args ', arguments);
+			}
 		});
 	});
 
