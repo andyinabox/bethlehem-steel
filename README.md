@@ -79,15 +79,15 @@ And so when the page loads it will become this behind the scenes:
 The same behavior applies to `<audio>` elements:
 
 ```html
-<video data-mediaid="karaokeTime" data-startmedia="0"></video>
+<audio data-mediaid="karaokeTime" data-startmedia="0"></audio>
 ```
 
 On page load is converted to:
 
 ```html
-<video data-mediaid="catSinging" data-startmedia="0">
+<audio data-mediaid="catSinging" data-startmedia="0">
 	<source src="../localMedia/videos/karaokeTime.mp3" type="audio/mpeg">
-</video>
+</audio>
 
 ```
 
