@@ -131,15 +131,37 @@ The following `data` attributes are available for controlling media playback bas
 
  - `data-startmedia`: Start playback at the given scroll position.
  - `data-stopmedia`: Stop playback at the given scroll position.
- - `data-startfadelength`: The length of the start audio fade in scroll units.
- - `data-stopfadelength`: The length of the end audio fade in scroll units.
- - `data-maxvolume`: The maximum volume for this media.
- - `data-minvolume`: The minimum volume for this media.
+ - `data-startfadelength`: The length of the start audio fade in scroll units (default value: 300).
+ - `data-stopfadelength`: The length of the end audio fade in scroll units (default value: 300).
+ - `data-maxvolume`: The maximum volume for this media (default value: 1).
+ - `data-minvolume`: The minimum volume for this media (default value: 0).
 
- #### Examples ####
+#### Examples ####
 
+##### Basic example
 
+To include an video element that will start at scroll position of 100, fade the audio in for 300 scroll units, start fading out the audio at scroll position 1200 and stop at 1500:
 
+```html
+<video data-mediaid="catSinging" data-startmedia="100" data-stopmedia="1500"></video>
+```
+
+Notes:
+
+ - While not explicitly configured, the audio will automatically fade for 300 scroll units on each side.
+
+##### Background music
+
+To include an audio file that will start immediately once the interactive is loaded, and play for the entire duration of the interactive at half volume:
+
+```html
+<audio data-mediaid="karaokeTime" data-startmedia="0" data-startfadelength="0" data-maxvolume="0.5"></audio>
+```
+Notes:
+
+ - Setting `data-startfadelength` to `0` means that the audio will start immediately, with out fading in over scroll-time.
+ - Setting `data-maxvolume` to `0.5` keeps the audio from ever getting higher than half volume.
+ - When omitting the `data-stopmedia` attribute, the media will play on forever once it has started.
 
 Helpful Links & Resources
 -------------------------
@@ -157,24 +179,13 @@ Helpful Links & Resources
  - [Main Example](http://prinzhorn.github.io/skrollr/) (polka dots)
  - [Examples](https://github.com/Prinzhorn/skrollr/tree/master/examples)
 
-### Misc
+### CSS
 
+### HTML5
 
-Todo
------
+### Sublime Text
 
-*Andy*
+### Terminal
 
- - [ ] Compile links & resources
- - [ ] Comment current code
- - [ ] Figure out why nothing is showing up on iOS
- - [ ] Preloading issues
- 	- [ ] Videos in Safari
- 	- [ ] Sounds in chrome when Dev Tools is disabled
-
-*Andrea*
-
-
-*Susannah*
 
 
