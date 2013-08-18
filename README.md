@@ -6,7 +6,9 @@ An interactive website about Bethlehem Steel.
 Instructions
 -------------
 
-Most of what you need to know for the scrolling
+Most of what you need to know for the visual effects will actually be found elsewhere, especially in the documentation for the [skrollr plugin](https://github.com/Prinzhorn/skrollr) we are using for the scroll functionality. See the bottom of this document for more links and resources.
+
+The instructions in this section are mainly for functionality that is specific to this project, like "dev mode", asset loading, and scroll-based media playback.
 
 ### Dev mode
 
@@ -186,6 +188,7 @@ Helpful Links & Resources
 ### Sublime Text
 
 ### Terminal
+
 
 
 
