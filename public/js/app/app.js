@@ -24,6 +24,14 @@ define([
 		dev.log(id + ' paused at volume '+volume)
 	})
 
+	// testing out preloader events
+	_(preloader.getEvents()).each(function(channel, index){
+		console.log('registering preloader channel "'+channel+'"');
+		_m.subscribe(channel, function() {
+			console.log('event channel "'+channel+'" triggered with args ', arguments);
+		});
+	});
+
 	preloader.init({},_m).then(function(e){
 
 		$('.fullscreen').height($(window).height());

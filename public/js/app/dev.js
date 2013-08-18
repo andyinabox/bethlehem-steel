@@ -26,11 +26,11 @@ define(['jquery','lodash','mediator-js', 'app/requestAnimationFrame'], function(
 	};
 
 	function _onPreloaderProgress(e) {
-		_log(e.resource.getName()+' loaded ('+e.completedCount+'/'+e.totalCount+')');
+		// _log(e.resource.getName()+' loaded ('+e.completedCount+'/'+e.totalCount+')');
 	}
 
 	function _onPreloaderComplete(e) {
-		window.setTimeout(_log, 0, 'All media loaded');
+		// window.setTimeout(_log, 0, 'All media loaded');
 	}
 
 	function _setSkrollr(skrollr) {
