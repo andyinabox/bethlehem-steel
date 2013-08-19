@@ -72,9 +72,9 @@ define([
 
 		// set up event methods
 		_allCompleteDfd.then(_onAllComplete);
-		_imagesDfd.then(_onImagesComplete());
-		_videosDfd.then(_onVideosComplete());
-		_soundsDfd.then(_onSoundsComplete());
+		_imagesDfd.then(_onImagesComplete);
+		_videosDfd.then(_onVideosComplete);
+		_soundsDfd.then(_onSoundsComplete);
 
 		// dom ready
 		$(_domReady);
@@ -123,16 +123,8 @@ define([
 
 	function _registerVideo(relativePath, key) {
 		var dfd = $.Deferred(),
-			// $vid = $('<video>'),
 			path = _getPath(_mediaRoot, relativePath);
 
-
-		// set up preloading
-		// $vid.on('canplaythrough', dfd.resolve);
-		// $vid.attr('preload', 'auto');
-
-		// $vid.attr('src', path);
-		// $vid.get(0).load();
 		_loader.videos[key] = _formatPreloaderObject(path, dfd);
 
 		// event callbacks
@@ -149,15 +141,9 @@ define([
 
 	function _registerSound(relativePath, key) {
 		var dfd = $.Deferred(),
-			$snd = $('<audio>'),
 			path = _getPath(_mediaRoot, relativePath);
 
-		// set up preloading
-		$snd.on('canplaythrough', dfd.resolve);
-		$snd.attr('preload', 'auto');
-		// $snd.attr('src', path);
-		// $snd.get(0).load();
-		_loader.sounds[key] = _formatPreloaderObject(path, dfd, $snd.get(0));
+		_loader.sounds[key] = _formatPreloaderObject(path, dfd);
 
 		// event callbacks
 		dfd.done(
@@ -192,18 +178,33 @@ define([
 	function _applyVideo(preloader, key) {
 		var path = preloader.path,
 			vidSel = 'video[data-mediaid="'+key+'"]',
-			$vid = $(vidSel);
+			$vid = $(vidSel),
+			vol;
 
 
 		if($vid.length < 1) {
-			$vid = $('<audio>');
+			$vid = $('<video>');
 		}
 
-		$vid.attr('preload', 'auto');
-		$vid.on('canplaythrough', preloader.dfd.resolve);
 
-		_addMediaSourceElement($vid, path);		
+		// $vid.attr('preload', 'auto');
+		$vid.on('canplaythrough', preloader.dfd.resolve);
+		$vid.on('load', preloader.dfd.resolve);
+		$vid.attr('src', path);
+		$vid.get(0).load();
+
+		// these are for safari/ios
+		vol = $vid.attr('volume');
+		$vid.attr('volume', 0);
+		$vid.get(0).play();
+		setTimeout(function() {
+			$vid.get(0).pause();
+			$vid.attr('volume', vol);
+		});
+
+		// _addMediaSourceElement($vid, path);		
 	}
+
 
 	function _applySound(preloader, key) {
 		var path = preloader.path,
@@ -214,10 +215,12 @@ define([
 			$snd = $('<audio>');
 		}
 
-		$snd.attr('preload', 'auto');
+		// $snd.attr('preload', 'auto');
 		$snd.on('canplaythrough', preloader.dfd.resolve);
+		$snd.attr('src', path);
+		$snd.get(0).load();
 
-		_addMediaSourceElement($snd, path);		
+		// _addMediaSourceElement($snd, path);		
 	}
 
 	/*

@@ -1,7 +1,7 @@
 define({
-	"mediaRoot" : "http://dl.dropboxusercontent.com/u/2100102/bethlehem/",
+	// "mediaRoot" : "http://dl.dropboxusercontent.com/u/2100102/bethlehem/",
 	// "mediaRoot" : "http://s3.amazonaws.com/bethlehem/",
-	// "mediaRoot" : "../localMedia/",
+	"mediaRoot" : "../localMedia/",
 	"sounds" : {
 		"Richie_WelfareRoom" : "sounds/Richie_WelfareRoom.mp3",
 		// "2200_DEGREES_Music_Stories" : "sounds/2200_DEGREES_Music_Stories.mp3",
