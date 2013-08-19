@@ -24,6 +24,14 @@ define([
 		dev.log(id + ' paused at volume '+volume)
 	})
 
+	_m.subscribe('preloader:progress', function(evt) {
+		dev.log('Loading '+evt.type+' "'+evt.path+'" ('+evt.completed+'/'+evt.count+':'+evt.total.completed+'/'+evt.total.count+')');
+	})
+
+	_m.subscribe('preloader:complete', function(evt) {
+		dev.log('All media loaded');
+	})
+
 	// testing out preloader events
 	_(preloader.getEvents()).each(function(channel, index){
 		console.log('registering preloader channel "'+channel+'"');

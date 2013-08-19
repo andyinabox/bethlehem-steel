@@ -271,8 +271,8 @@ define([
 			count: count,
 			type: type,
 			timestamp: (new Date()).getTime(),
-			allTypes: {
-				total: _getTotalLoadedCount(),
+			total: {
+				completed: _getTotalLoadedCount(),
 				count: _getTotalMediaCount()
 			}
 		}

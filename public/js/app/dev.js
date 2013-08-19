@@ -20,18 +20,8 @@ define(['jquery','lodash','mediator-js', 'app/requestAnimationFrame'], function(
 		if(_enabled) {
 			window.devtools = self;
 			_showDevDisplay();
-			_mediator.subscribe('preloader:progress', _onPreloaderProgress);
-			_mediator.subscribe('preloader:complete', _onPreloaderComplete);
 		}
 	};
-
-	function _onPreloaderProgress(e) {
-		// _log(e.resource.getName()+' loaded ('+e.completedCount+'/'+e.totalCount+')');
-	}
-
-	function _onPreloaderComplete(e) {
-		// window.setTimeout(_log, 0, 'All media loaded');
-	}
 
 	function _setSkrollr(skrollr) {
 		if(_enabled) {
