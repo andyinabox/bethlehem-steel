@@ -44,7 +44,7 @@ define([
 		dev.setSkrollr(_skrollr);
 		skrollrMedia.init(_skrollr, {}, _m);
 
-		$('#content').show();
+		// $('#content').show();
 		$('#loading').hide();
 	});
 

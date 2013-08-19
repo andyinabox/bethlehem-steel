@@ -71,10 +71,10 @@ define([
 
 
 		// set up event methods
-		_allCompleteDfd.then(_onAllComplete);
 		_imagesDfd.then(_onImagesComplete);
 		_videosDfd.then(_onVideosComplete);
 		_soundsDfd.then(_onSoundsComplete);
+		_allCompleteDfd.then(_onAllComplete);
 
 		// dom ready
 		$(_domReady);
@@ -179,27 +179,20 @@ define([
 		var path = preloader.path,
 			vidSel = 'video[data-mediaid="'+key+'"]',
 			$vid = $(vidSel),
-			vol;
+			loaded;
 
+		// force preload with fake vid
+		if($vid.length < 1) vid = $('<video>');
 
-		if($vid.length < 1) {
-			$vid = $('<video>');
-		}
-
-
-		// $vid.attr('preload', 'auto');
 		$vid.on('canplaythrough', preloader.dfd.resolve);
 		$vid.on('load', preloader.dfd.resolve);
-		$vid.attr('src', path);
-		$vid.get(0).load();
 
-		// these are for safari/ios
-		vol = $vid.attr('volume');
-		$vid.attr('volume', 0);
-		$vid.get(0).play();
-		setTimeout(function() {
-			$vid.get(0).pause();
-			$vid.attr('volume', vol);
+		// for future reference, may need to use some tricks
+		// to get working on the iPad:
+		// https://gist.github.com/millermedeiros/891886
+		$vid.each(function(i,vid){
+			vid.src = path;
+			vid.load();
 		});
 
 		// _addMediaSourceElement($vid, path);		
@@ -211,14 +204,15 @@ define([
 			sndSel = 'audio[data-mediaid="'+key+'"]',
 			$snd = $(sndSel);
 
-		if($snd.length < 1) {
-			$snd = $('<audio>');
-		}
+		if($snd.length < 1) $snd = $('<audio>');
 
-		// $snd.attr('preload', 'auto');
 		$snd.on('canplaythrough', preloader.dfd.resolve);
-		$snd.attr('src', path);
-		$snd.get(0).load();
+		$snd.on('load', preloader.dfd.resolve);
+
+		$snd.each(function(i, snd){
+			snd.src = path;
+			snd.load();
+		});
 
 		// _addMediaSourceElement($snd, path);		
 	}

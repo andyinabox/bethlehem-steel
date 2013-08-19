@@ -21,26 +21,11 @@ require.config({
         jquery: 'lib/jquery/jquery',
         lodash: 'lib/lodash/lodash',
         'mediator-js': 'lib/mediator-js/lib/mediator',
-
-
-        'PxLoader': 'lib/pxloader/PxLoader',
-        'PxLoaderImage' : 'lib/pxloader/PxLoaderImage',
-        'PxLoaderSound' : 'lib/pxloader/PxLoaderSound',
-        'PxLoaderVideo' : 'lib/pxloader/PxLoaderVideo',
-
-        'soundmanager2' : 'lib/soundmanager2/script/soundmanager2',
-
         'skrollr': 'lib/skrollr/src/skrollr'
     },
     shim: {
     	'skrollr' : {
     		exports: 'skrollr'
-    	},
-    	'soundmanager2': {
-    		exports: 'soundManager'
-    	},
-      	'PxLoaderImage': ['PxLoader'],
-    	'PxLoaderVideo': ['PxLoader'],
-    	'PxLoaderSound': ['PxLoader', 'soundmanager2']
+    	}
     }
 });
