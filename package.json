@@ -1,0 +1,23 @@
+{
+	"name" : "bethlehem-steel",
+	"version" : "0.0.1",
+	"description" : "An interactive website about Bethlehem Steel.",
+	"contributors" : [
+		{
+			"name" : "Andrea Rollefson"
+		},
+		{
+			"name" : "Susannah Feinstein"
+		},
+		{
+			"name" : "Andy Dayton",
+			"email" : "amdayton@gmail.com"
+		}
+	],
+	"devDependencies": {
+		"grunt" : "0.4.1",
+		"grunt-contrib-jshint" : "0.6.3",
+		"grunt-contrib-qunit": "0.2.2",
+		"grunt-requirejs": "0.3.5"
+	}
+}

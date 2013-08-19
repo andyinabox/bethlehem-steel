@@ -2,4 +2,5 @@
 Thumbs.db
 
 localMedia
-dist
+build
+node_modules
