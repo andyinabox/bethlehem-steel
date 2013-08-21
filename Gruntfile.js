@@ -55,7 +55,7 @@ module.exports = function(grunt) {
               jQuery: true
             }
           },
-          files: ['principium/*.js', 'principium.js']
+          files: ['js/*.js', 'js/**/*.js']
         }
     });
 

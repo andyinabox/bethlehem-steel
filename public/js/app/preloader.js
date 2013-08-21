@@ -164,13 +164,15 @@ define([
 	function _applyImage(preloader, key) {
 		var path = preloader.path,
 			bgSel = '.image[data-mediaid="'+key+'"]',
-			imgSel= 'img[data-mediaid="'+key+'"]',
+			imgSel= 'img[data-mediaid="'+key+'"],img[src="'+media.images[key]+'"]',
 			$bgImg = $(bgSel),
 			$img = $(imgSel);			
 
 			// background images
 			$bgImg.css('background-image', 'url("'+path+'")');
 
+
+			console.log('image', $img);
 			// regular ol images
 			$img.attr('src', path);
 	}
