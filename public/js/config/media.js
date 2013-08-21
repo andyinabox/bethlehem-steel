@@ -30,7 +30,7 @@ define({
 		"pillars1" : "images/pillars1.jpg",
 		"pods" : "images/pods.jpg",
 		"snowy-exterior" : "images/snowy-exterior.jpg",
-		// "illustration-white" : "images/illustration-white.png"
+		"illustration-white" : "images/illustration-white.png"
 	}
 });
 
