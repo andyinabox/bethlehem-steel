@@ -47,7 +47,7 @@ define([
 	preloader.init({},_m).then(function(e){
 
 		$('.fullscreen').height($(window).height());
-		$('#textlayer').css('top',$(window).height());
+		// $('#textlayer').css('top',$(window).height());
 		_skrollr = skrollr.init();
 		dev.setSkrollr(_skrollr);
 		skrollrMedia.init(_skrollr, {}, _m);
