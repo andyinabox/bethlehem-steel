@@ -27,6 +27,7 @@ define({
 		"disc1" : "images/disc1.jpg",
 		"disc2" : "images/disc2.jpg",
 		"disc3" : "images/disc3.jpg",
+		"blastfurnace_illustration_gray" : "images/blastfurnace_illustration_gray.jpg",
 		"green" : "images/green.jpg",
 		"phone" : "images/phone.jpg",
 		"pillars1" : "images/pillars1.jpg",
