@@ -11,13 +11,15 @@ define({
 		// "Ritchie001_Zen_Story" : "sounds/Ritchie001_Zen_Story.mp3",
 		// "sodabottles" : "sounds/sodabottles.mp3",
 		// "Steel_Ambient_Sounds" : "sounds/Steel_Ambient_Sounds.mp3",
-		"Steel_Music_From_3MinFilm" : "sounds/Steel_Music_From_3MinFilm.mp3",
+		"Steel_Music_From_3MinFilm" : "sounds/Steel_Music_From_3MinFilm.mp3"
 		// "Steel_Music_like_MeatMarket_Copyright_Free" : "sounds/Steel_Music_like_MeatMarket_Copyright_Free.mp3"
 	},
 	"videos" : {
 		"Time_Lapse_Clip_Film" : "videos/Time_Lapse_Clip_Film.mp4",
 		"Film_no_Audio_grass_and_steel_02" : "videos/Film_no_Audio_grass_and_steel_02.mp4",
-		"Glove_to_wide" : "videos/Glove_to_wide.mp4"
+		"Glove_to_wide" : "videos/Glove_to_wide.mp4",
+		"WelfareRoom" : "videos/WelfareRoom.mp4"
+
 	},
 	"images" : {
 		"cemetary" : "images/cemetary.jpg",
@@ -30,7 +32,8 @@ define({
 		"pillars1" : "images/pillars1.jpg",
 		"pods" : "images/pods.jpg",
 		"snowy-exterior" : "images/snowy-exterior.jpg",
-		"illustration-white" : "images/illustration-white.png"
+		"illustration-white" : "images/illustration-white.png",
+		"snow_BS_town_IA" : "images/snow_BS_town_IA.jpg"
 	}
 });
 
