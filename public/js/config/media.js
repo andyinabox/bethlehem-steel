@@ -20,7 +20,7 @@ define({
 		"WelfareRoom" : "videos/WelfareRoom.mp4",
 		"Aerial_NoAudio" : "videos/Aerial_NoAudio.mp4",
 		"reflections_NoAudio" : "videos/reflections_NoAudio.mp4",
-		"making_steel_richie" : "videos/making_steel_richie.mp4",
+		"making_steel" : "videos/making_steel.mp4",
 		"Demolition" : "videos/Demolition.mp4",
 		"Casino_Pods" : "videos/Casino_Pods.mp4"
 	},
@@ -54,7 +54,7 @@ define({
 		"pods" : "images/pods.jpg",
 		"snowy-exterior" : "images/snowy-exterior.jpg",
 		"town01_AR" : "images/town01_AR.jpg",
-		"town02_AR" : "images/town02_AR.jpg",
+		"town02bw_AR" : "images/town02bw_AR.jpg",
 		"town04_AR" : "images/town04_AR.jpg",
 		"town05_AR" : "images/town05_AR.jpg",
 		"town_snow_AR" : "images/town_snow_AR.jpg",
