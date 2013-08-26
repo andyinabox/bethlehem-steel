@@ -26,6 +26,7 @@ define({
 	},
 	"images" : {
 		"town_cemetary02_AR" : "images/town_cemetary02_AR.jpg",
+		"town_cemetary03_AR" : "images/town_cemetary03_AR.jpg",
 		"tower" : "images/tower.jpg",
 		// "disc1" : "images/disc1.jpg",
 		// "disc2" : "images/disc2.jpg",
@@ -47,7 +48,7 @@ define({
 		"empty_room715_JB" : "images/empty_room715_JB.jpg",
 		"empty_room01_AR" : "images/empty_room01_AR.jpg",
 		"snow_doorway01_AR" : "images/snow_doorway01_AR.jpg",
-		"BS02_JB" : "images/BS02_JB.jpg",
+		"demolition03_JB" : "images/demolition03_JB.jpg",
 		// "clue_tools_AR" : "images/clue_tools_AR.jpg",
 		// "blast_furnaceD02_IA" : "images/blast_furnaceD02_IA.jpg",
 		"phone" : "images/phone.jpg",
@@ -59,6 +60,7 @@ define({
 		"town04_AR" : "images/town04_AR.jpg",
 		"town07_AR" : "images/town07_AR.jpg",
 		"town_snow_AR" : "images/town_snow_AR.jpg",
+		"powerhouse_overlap_IA" : "images/powerhouse_overlap_IA.jpg",
 		"richie_house03bw_IA" : "images/richie_house03bw_IA.jpg",
 		"BS_pinhole01_JB" : "images/BS_pinhole01_JB.jpg",
 		"BS_pinhole02_JB" : "images/BS_pinhole02_JB.jpg"
