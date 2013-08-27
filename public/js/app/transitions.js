@@ -1,4 +1,9 @@
-define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
+define([
+	'jquery',
+	'lodash',
+	'skrollr',
+	'app/requestAnimationFrame'
+], function($, _, skrollr, rAF) {
 
 	var self = {},
 		_defaults = {
@@ -6,10 +11,12 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 		},
 		_opts,
 
-		_initDfd,
+		_initDfd = $.Deferred(),
 
-		_transitions,
-		_skrollr;
+		_transitions = {},
+		_skrollr,
+
+		_loopCallbacks = [];
 
 	/**
 	 * Initialize the transitions module
@@ -17,12 +24,11 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 	 * @return {Object} Deferred object that resolves when initialization is complete.
 	 */
 	function _init(opts) {
-		var _opts = _.defaults(_defaults, (opts||{}));
+		_opts = _.defaults(_defaults, (opts||{}));
 
 		_skrollr = skrollr.get();
 
 		$(_onDomReady);
-
 
 		return _initDfd.promise();
 	};
@@ -32,7 +38,22 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 	 */
 	function _onDomReady() {
 		_setDocumentTransitions();
+
+		// GO!!
+		_loop();
+		
 		_initDfd.resolve();
+	};
+
+	function _loop(timestamp) {
+		var scrollTop = _skrollr.getScrollTop(),
+			i = 0;
+
+		for(i; i<_loopCallbacks.length; i++) {
+			_loopCallbacks[i].cb.apply(_loopCallbacks[i].ctx, [scrollTop]);
+		}
+
+		requestAnimationFrame(_loop);
 	};
 
 	/**
@@ -42,7 +63,7 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 	 */
 	function _registerTransition(name, callback) {
 		if(_.isFunction(callback)) {
-			_transition[name] = callback;
+			_transitions[name] = callback;
 		} else {
 			throw new Error('Registering transition must include a callback');
 		}
@@ -54,13 +75,23 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 	function _setDocumentTransitions() {
 		var $t = $('[data-'+_opts.transitionsAttr+']');
 
+		console.log('transition elements', $t);
+
 		$t.each(function(index, element) {
-			var transitions = $(this).data(_opts.transitionsAttr);
+			var transitions = $(this).data(_opts.transitionsAttr),
+				event = { 
+					skrollr: _skrollr,
+					loop: _addAnimationLoopCallback
+				};
+
 
 			if(_.isObject(transitions)) {
 				_(transitions).each(function(args, key) {
+					var callback;
+					args.unshift(event);
 					if(_.has(_transitions, key) && _.isArray(args)) {
-						_transitions[key].apply(element, args);
+						callback = _transitions[key];
+						callback.apply(element, args);
 					}
 				});
 			}
@@ -68,7 +99,18 @@ define(['jquery', 'lodash', 'skrollr'], function($, _, skrollr) {
 		});
 	};
 
+	function _addAnimationLoopCallback(callback, context) {
+		var ctx = context || arguments.callee.caller;
+		if(_.isFunction(callback)) {
+			_loopCallbacks.push({cb:callback,ctx:context});
+		} else {
+			throw new Error('Callback must be a function!');
+		}
+	};
+
 	self.init = _init;
 	self.registerTransition = _registerTransition;
+
+	return self;
 
 });
