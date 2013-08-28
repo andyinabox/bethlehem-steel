@@ -24,6 +24,7 @@ define({
 		"making_steel" : "videos/making_steel.mp4",
 		"Demolition" : "videos/Demolition.mp4",
 		"Casino_Pods" : "videos/Casino_Pods.mp4"
+		// "casino_chain_ToBlack" : "videos/casino_chain_ToBlack.mp4"
 	},
 	"images" : {
 		"town_cemetary02_AR" : "images/town_cemetary02_AR.jpg",
@@ -39,7 +40,7 @@ define({
 		// "detail_sawdust_AR" : "images/detail_sawdust_AR.jpg",
 		"high_house_gears01_JB" : "images/high_house_gears01_JB.jpg",
 		"blastfurnaceillustrationgray" : "images/blastfurnace_illustration_gray.jpg",
-		// "blastfurnaceillustrationblack" : "images/blastfurnace_illustration_black.jpg",
+		"construction04_AR" : "images/construction04_AR.jpg",
 		"BS02_JB" : "images/BS02_JB.jpg",
 		"BS01_JB" : "images/BS01_JB.jpg",
 		// "town_cemetary03_AR" : "images/town_cemetary03_AR.jpg",
