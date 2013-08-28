@@ -172,7 +172,7 @@ define([
 			$bgImg.css('background-image', 'url("'+path+'")');
 
 
-			console.log('image', $img);
+			// console.log('image', $img);
 			// regular ol images
 			$img.attr('src', path);
 	}

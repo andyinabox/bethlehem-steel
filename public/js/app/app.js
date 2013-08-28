@@ -4,13 +4,37 @@ define([
 	'skrollr',
 	'mediator-js', 
 	'app/preloader',
+	'app/transitions',
 	'app/skrollr-media',
 	'app/dev'
-], function($, _, skrollr, mediator, preloader, skrollrMedia, dev) {
+], function($, _, skrollr, mediator, preloader, transitions, skrollrMedia, dev) {
 	var _m = new Mediator(),
 		_skrollr;
 
 	dev.init({}, _m);
+
+
+	transitions.registerTransition('videoFeature', function(evt){
+
+		evt.loop(function(scrollTop){
+			var $this = $(this);
+				$vid = $this.find('video'),
+				position = $(this).position(),
+				height = $(this).height(),
+				vidHeight = $vid.height(),
+				wHeight = $(window).height();
+
+			if(scrollTop > position.top-(wHeight/2-vidHeight/2)
+				&& scrollTop < position.top+height-(wHeight/2+vidHeight/2)) {
+				$vid.css('top', (scrollTop-position.top)+(wHeight/2)-(vidHeight/2));
+			} else if(scrollTop > position.top+height-(wHeight/2+vidHeight/2)){
+				$vid.css('top', height-vidHeight);
+			} else {
+				$vid.css('top', 0);				
+			}
+
+		}, this);
+	});
 
 	_m.subscribe('preloader:progress', function(e) {
 	
@@ -50,6 +74,9 @@ define([
 		// $('#textlayer').css('top',$(window).height());
 		_skrollr = skrollr.init();
 		dev.setSkrollr(_skrollr);
+
+		transitions.init();
+
 		skrollrMedia.init(_skrollr, {}, _m);
 
 		// $('#content').show();
