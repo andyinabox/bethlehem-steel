@@ -23,8 +23,8 @@ define({
 		"fan02_NoAudio" : "videos/fan02_NoAudio.mp4",
 		"making_steel" : "videos/making_steel.mp4",
 		"Demolition" : "videos/Demolition.mp4",
-		"Casino_Pods" : "videos/Casino_Pods.mp4"
-		// "casino_chain_ToBlack" : "videos/casino_chain_ToBlack.mp4"
+		"Casino_Pods" : "videos/Casino_Pods.mp4",
+		"casino_chain" : "videos/casino_chain.mp4"
 	},
 	"images" : {
 		"town_cemetary02_AR" : "images/town_cemetary02_AR.jpg",
