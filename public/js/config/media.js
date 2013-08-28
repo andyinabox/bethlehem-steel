@@ -52,8 +52,12 @@ define({
 		"demolition03_JB" : "images/demolition03_JB.jpg",
 		"demolition686_steel_JB" : "images/demolition686_steel_JB.jpg",
 		"destruction01_AR" : "images/destruction01_AR.jpg",
-		"construction_snow02_AR" : "images/construction_snow02_AR.jpg",
-		"construction04_AR" : "images/construction04_AR.jpg",
+
+		// MISSING from DropBox below
+		// "construction_snow02_AR" : "images/construction_snow02_AR.jpg",
+		// "construction04_AR" : "images/construction04_AR.jpg",
+		// MISSING from DropBox above
+		
 		// "clue_tools_AR" : "images/clue_tools_AR.jpg",
 		// "blast_furnaceD02_IA" : "images/blast_furnaceD02_IA.jpg",
 		"phone" : "images/phone.jpg",
