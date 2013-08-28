@@ -20,6 +20,7 @@ define({
 		"WelfareRoom" : "videos/WelfareRoom.mp4",
 		"Aerial_NoAudio" : "videos/Aerial_NoAudio.mp4",
 		"reflections_NoAudio" : "videos/reflections_NoAudio.mp4",
+		"fan02_NoAudio" : "videos/fan02_NoAudio.mp4",
 		"making_steel" : "videos/making_steel.mp4",
 		"Demolition" : "videos/Demolition.mp4",
 		"Casino_Pods" : "videos/Casino_Pods.mp4"
