@@ -15,17 +15,14 @@ define([
 
 
 	transitions.registerTransition('videoFeature', function(evt){
-		var $this = $(this);
-			$vid = $this.find('video'),
-			position = $(this).position(),
-			height = $(this).height();
-
-		console.log('apply transition', this, $(this));
 
 		evt.loop(function(scrollTop){
-			var vidHeight = $vid.height(),
+			var $this = $(this);
+				$vid = $this.find('video'),
+				position = $(this).position(),
+				height = $(this).height(),
+				vidHeight = $vid.height(),
 				wHeight = $(window).height();
-
 
 			if(scrollTop > position.top-(wHeight/2-vidHeight/2)
 				&& scrollTop < position.top+height-(wHeight/2+vidHeight/2)) {
@@ -60,16 +57,16 @@ define([
 	})
 
 	// testing out preloader events
-	// _(preloader.getEvents()).each(function(channel, index){
-	// 	console.log('registering preloader channel "'+channel+'"');
-	// 	_m.subscribe(channel, function(evt, ch) {
-	// 		if(evt && evt.key) {
-	// 			console.log('loaded '+evt.type+' '+evt.key+' ('+evt.completed+'/'+evt.count+')');
-	// 		} else {
-	// 			console.log('event channel "'+channel+'" triggered with args ', arguments);
-	// 		}
-	// 	});
-	// });
+	_(preloader.getEvents()).each(function(channel, index){
+		console.log('registering preloader channel "'+channel+'"');
+		_m.subscribe(channel, function(evt, ch) {
+			if(evt && evt.key) {
+				console.log('loaded '+evt.type+' '+evt.key+' ('+evt.completed+'/'+evt.count+')');
+			} else {
+				console.log('event channel "'+channel+'" triggered with args ', arguments);
+			}
+		});
+	});
 
 	preloader.init({},_m).then(function(e){
 

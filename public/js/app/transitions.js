@@ -87,11 +87,9 @@ define([
 
 			if(_.isObject(transitions)) {
 				_(transitions).each(function(args, key) {
-					var callback;
 					args.unshift(event);
 					if(_.has(_transitions, key) && _.isArray(args)) {
-						callback = _transitions[key];
-						callback.apply(element, args);
+						_transitions[key].apply(element, args);
 					}
 				});
 			}
