@@ -39,12 +39,15 @@ define([
 			progress: 'preloader:progress',
 			complete: 'preloader:complete',
 			//images
+			imagesStart: 'preloader:images:start',
 			imagesProgress: 'preloader:images:progress',
 			imagesComplete: 'preloader:images:complete',
 			//videos
+			videosStart: 'preloader:videos:start',
 			videosProgress: 'preloader:videos:progress',
 			videosComplete: 'preloader:videos:complete',
 			//sounds
+			soundsStart: 'preloader:sounds:start',
 			soundsProgress: 'preloader:sounds:progress',
 			soundsComplete: 'preloader:sounds:complete'
 		};
@@ -77,7 +80,9 @@ define([
 
 		// load sounds after images
 		$.when(_domReadyDfd, _imagesDfd).then(function(){
+			_mediator.publish(_events.soundsStart);
 			_(_loader.sounds).each(_applySound);
+			_mediator.publish(_events.videosStart);
 			_(_loader.videos).each(_applyVideo);
 		});
 
@@ -99,6 +104,7 @@ define([
 	function _domReady() {
 
 		_(_loader.images).each(_applyImage);
+		_mediator.publish(_events.imagesStart);
 
 		_domReadyDfd.resolve();
 	}
@@ -184,6 +190,7 @@ define([
 			// console.log('image', $img);
 			// regular ol images
 			$img.attr('src', path);
+
 	}
 
 	function _applyVideo(preloader, key) {
@@ -206,6 +213,7 @@ define([
 			vid.load();
 		});
 
+
 		// _addMediaSourceElement($vid, path);		
 	}
 
@@ -224,6 +232,8 @@ define([
 			snd.src = path;
 			snd.load();
 		});
+
+
 
 		// _addMediaSourceElement($snd, path);		
 	}

@@ -24,7 +24,17 @@
 
       <div id="loading">
 
-        <h1>Loading</h1>
+        <div id="loaderWrapper">
+          <img id="fastSpinner" class="loadingSpinner" src="img/twirl.gif" style="width:160px; height:160px;">
+          <img id="slowSpinner" class="loadingSpinner" style="display: none;" src="img/slowing-twirl.gif" style="width:160px; height:160px;">
+
+          <div id="loadingMessage">
+            <div class="loadingHeader">Loading media</div>
+            <div class="loadingImages"><span class="loadingLabel">Images</span> <span class="count">&nbsp;/&nbsp;</div>
+            <div class="loadingSounds"><span class="loadingLabel">Sounds</span> <span class="count">&nbsp;/&nbsp;</div>
+            <div class="loadingVideos"><span class="loadingLabel">Videos</span> <span class="count">&nbsp;/&nbsp;</div>
+          </div>
+        </div>
 
       </div>
 
@@ -40,6 +50,11 @@
         <!-- ***************************************************************************
           layer 1 for primary media
         **************************************************************************** -->
+
+          <div id="scrollDownWrapper" data-0="opacity:1" data-200="margin-top:0;opacity:0;"> 
+            <div class="prompt">(Scroll Down)</div>
+          </div>
+
 
         <div id="mainlayer">
 
