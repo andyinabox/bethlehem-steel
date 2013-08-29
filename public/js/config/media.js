@@ -59,7 +59,7 @@ define({
 
 		// MISSING from DropBox below
 		// "construction_snow02_AR" : "images/construction_snow02_AR.jpg",
-		// "construction04_AR" : "images/construction04_AR.jpg",
+		"construction04_AR" : "images/construction04_AR.jpg",
 		// MISSING from DropBox above
 		
 		// "clue_tools_AR" : "images/clue_tools_AR.jpg",
