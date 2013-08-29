@@ -54,6 +54,7 @@ define({
 		"snow_doorway01_AR" : "images/snow_doorway01_AR.jpg",
 		"demolition03_JB" : "images/demolition03_JB.jpg",
 		"demolition686_steel_JB" : "images/demolition686_steel_JB.jpg",
+		"credits" : "images/credits.jpg",
 		"destruction01_AR" : "images/destruction01_AR.jpg",
 
 		// MISSING from DropBox below
@@ -68,6 +69,7 @@ define({
 		"pods" : "images/pods.jpg",
 		"snowy-exterior" : "images/snowy-exterior.jpg",
 		"town01_AR" : "images/town01_AR.jpg",
+		"town02_AR" : "images/town02_AR.jpg",
 		"town02bw_AR" : "images/town02bw_AR.jpg",
 		"town04_AR" : "images/town04_AR.jpg",
 		"town07_AR" : "images/town07_AR.jpg",
