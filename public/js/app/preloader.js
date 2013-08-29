@@ -6,6 +6,7 @@ define([
 ], function($, _, mediator, media) {
 	var self = {},
 		_defaults = {
+			videosTimeout: 10000
 		},
 		_opts,
 		
@@ -14,9 +15,9 @@ define([
 
 		// deferreds
 		_domReadyDfd = $.Deferred(),
-		_imagesDfd,
-		_videosDfd,
-		_soundsDfd,
+		_imagesDfd = $.Deferred(),
+		_videosDfd = $.Deferred(),
+		_soundsDfd = $.Deferred(),
 		_allCompleteDfd,
 
 		// media
@@ -62,13 +63,14 @@ define([
 		_(media.sounds).each(_registerSound);
 
 		// set up deferred objects
-		_imagesDfd = $.when.apply($, _.pluck(_loader.images, 'dfd'));
-		_videosDfd = $.when.apply($, _.pluck(_loader.videos, 'dfd'));
-		_soundsDfd = $.when.apply($, _.pluck(_loader.sounds, 'dfd'));
+		$.when.apply($, _.pluck(_loader.images, 'dfd')).then(_imagesDfd.resolve);
+		$.when.apply($, _.pluck(_loader.sounds, 'dfd')).then(_soundsDfd.resolve);
+		$.when.apply($, _.pluck(_loader.videos, 'dfd')).then(_videosDfd.resolve);
+
 
 		_allCompleteDfd = $.when(
 			_imagesDfd,
-			// _videosDfd,
+			_videosDfd,
 			_soundsDfd,
 			_domReadyDfd
 		);
@@ -89,6 +91,8 @@ define([
 		$.when(_domReadyDfd, _soundsDfd).then(function(){
 			_mediator.publish(_events.videosStart);
 			_(_loader.videos).each(_applyVideo);
+			console.log("set videos timeout", _opts.videosTimeout);
+			window.setTimeout(_videosDfd.resolve, _opts.videosTimeout);
 		});
 
 		_allCompleteDfd.then(_onAllComplete);
