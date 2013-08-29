@@ -53,6 +53,7 @@ define({
 		"snow_doorway01_AR" : "images/snow_doorway01_AR.jpg",
 		"demolition03_JB" : "images/demolition03_JB.jpg",
 		"demolition686_steel_JB" : "images/demolition686_steel_JB.jpg",
+		"credits" : "images/credits.jpg",
 		"destruction01_AR" : "images/destruction01_AR.jpg",
 
 		// MISSING from DropBox below
