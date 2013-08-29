@@ -82,13 +82,14 @@ define([
 		$.when(_domReadyDfd, _imagesDfd).then(function(){
 			_mediator.publish(_events.soundsStart);
 			_(_loader.sounds).each(_applySound);
+			// _mediator.publish(_events.videosStart);
+			// _(_loader.videos).each(_applyVideo);
+		});
+
+		$.when(_domReadyDfd, _soundsDfd).then(function(){
 			_mediator.publish(_events.videosStart);
 			_(_loader.videos).each(_applyVideo);
 		});
-
-		// $.when(_domReadyDfd, _soundsDfd).then(function(){
-		// 	_(_loader.videos).each(_applyVideo);
-		// });
 
 		_allCompleteDfd.then(_onAllComplete);
 
