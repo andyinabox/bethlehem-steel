@@ -67,6 +67,7 @@ define({
 		"pods" : "images/pods.jpg",
 		"snowy-exterior" : "images/snowy-exterior.jpg",
 		"town01_AR" : "images/town01_AR.jpg",
+		"town02_AR" : "images/town02_AR.jpg",
 		"town02bw_AR" : "images/town02bw_AR.jpg",
 		"town04_AR" : "images/town04_AR.jpg",
 		"town07_AR" : "images/town07_AR.jpg",
