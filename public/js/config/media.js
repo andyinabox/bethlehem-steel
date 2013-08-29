@@ -1,7 +1,8 @@
 define({
 	// "mediaRoot" : "http://dl.dropboxusercontent.com/u/2100102/bethlehem/",
-	// "mediaRoot" : "http://s3.amazonaws.com/bethlehem/",
-	"mediaRoot" : "../localMedia/",
+	// "mediaRoot" : "https://s3.amazonaws.com/bethlehem/",
+	"mediaRoot" : "http://bethlehem.s3-website-us-east-1.amazonaws.com/",
+	// "mediaRoot" : "../localMedia/",
 	"sounds" : {
 		"Richie_WelfareRoom" : "sounds/Richie_WelfareRoom.mp3",
 		"Strike_Story" : "sounds/Strike_Story.mp3",
@@ -40,7 +41,7 @@ define({
 		// "detail_sawdust_AR" : "images/detail_sawdust_AR.jpg",
 		"high_house_gears01_JB" : "images/high_house_gears01_JB.jpg",
 		"blastfurnaceillustrationgray" : "images/blastfurnace_illustration_gray.jpg",
-		"construction04_AR" : "images/construction04_AR.jpg",
+		// "construction04_AR" : "images/construction04_AR.jpg",
 		"BS02_JB" : "images/BS02_JB.jpg",
 		"BS01_JB" : "images/BS01_JB.jpg",
 		// "town_cemetary03_AR" : "images/town_cemetary03_AR.jpg",

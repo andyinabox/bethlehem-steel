@@ -62,18 +62,29 @@ define([
 		_imagesDfd = $.when.apply($, _.pluck(_loader.images, 'dfd'));
 		_videosDfd = $.when.apply($, _.pluck(_loader.videos, 'dfd'));
 		_soundsDfd = $.when.apply($, _.pluck(_loader.sounds, 'dfd'));
+
 		_allCompleteDfd = $.when(
 			_imagesDfd,
-			_videosDfd,
+			// _videosDfd,
 			_soundsDfd,
 			_domReadyDfd
 		);
-
 
 		// set up event methods
 		_imagesDfd.then(_onImagesComplete);
 		_videosDfd.then(_onVideosComplete);
 		_soundsDfd.then(_onSoundsComplete);
+
+		// load sounds after images
+		$.when(_domReadyDfd, _imagesDfd).then(function(){
+			_(_loader.sounds).each(_applySound);
+			_(_loader.videos).each(_applyVideo);
+		});
+
+		// $.when(_domReadyDfd, _soundsDfd).then(function(){
+		// 	_(_loader.videos).each(_applyVideo);
+		// });
+
 		_allCompleteDfd.then(_onAllComplete);
 
 		// dom ready
@@ -88,8 +99,6 @@ define([
 	function _domReady() {
 
 		_(_loader.images).each(_applyImage);
-		_(_loader.videos).each(_applyVideo);
-		_(_loader.sounds).each(_applySound);
 
 		_domReadyDfd.resolve();
 	}
