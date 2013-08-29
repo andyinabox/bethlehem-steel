@@ -6,7 +6,7 @@ define([
 ], function($, _, mediator, media) {
 	var self = {},
 		_defaults = {
-			videosTimeout: 10000
+			videosTimeout: 15000
 		},
 		_opts,
 		
