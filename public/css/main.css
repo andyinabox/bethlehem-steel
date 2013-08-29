@@ -38,6 +38,7 @@ html, body {
 
 body {
 	line-height: 1.5em;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
 
 img {
@@ -109,6 +110,8 @@ p {
 	background: #000;
 	color: #ddd;
 	z-index: 9999;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+
 }
 
 #loaderWrapper {
