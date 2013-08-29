@@ -9,7 +9,8 @@ define([
 	'app/dev'
 ], function($, _, skrollr, mediator, preloader, transitions, skrollrMedia, dev) {
 	var _m = new Mediator(),
-		_skrollr;
+		_skrollr,
+		$loadingMessage = $('#loadingMessage');
 
 	dev.init({}, _m);
 
@@ -36,8 +37,38 @@ define([
 		}, this);
 	});
 
-	_m.subscribe('preloader:progress', function(e) {
+
+	_m.subscribe('preloader:images:start', function(e) {
+		$('#loadingMessage').find('.loadingImages').fadeIn();
+	});
+
+
+	_m.subscribe('preloader:sounds:start', function(e) {
+		$('#loadingMessage').find('.loadingSounds').fadeIn();
 	
+	});
+
+
+	_m.subscribe('preloader:videos:start', function(e) {
+		$('#loadingMessage').find('.loadingVideos').fadeIn();
+	
+	});	
+
+	_m.subscribe('preloader:images:progress', function(e) {
+		var $div = $('#loadingMessage').find('.loadingImages');
+		$div.find('.count').html(e.completed+'/'+e.count);
+	});
+
+
+	_m.subscribe('preloader:sounds:progress', function(e) {
+		var $div = $('#loadingMessage').find('.loadingSounds');
+		$div.find('.count').html(e.completed+'/'+e.count);	
+	});
+
+
+	_m.subscribe('preloader:videos:progress', function(e) {
+		var $div = $('#loadingMessage').find('.loadingVideos');
+		$div.find('.count').html(e.completed+'/'+e.count);	
 	});
 
 	_m.subscribe('skrollrMedia:play', function(id, volume) {
@@ -68,6 +99,10 @@ define([
 		});
 	});
 
+	$(function(){
+		$loadingMessage = $('#loadingMessage');
+	})
+
 	preloader.init({},_m).then(function(e){
 
 		$('.fullscreen').height($(window).height());
@@ -80,7 +115,11 @@ define([
 		skrollrMedia.init(_skrollr, {}, _m);
 
 		// $('#content').show();
-		$('#loading').hide();
+		$('#fastSpinner').hide();
+		$('#slowSpinner').show();
+		$('#loading').delay(200).fadeOut();
+
+
 	});
 
 });

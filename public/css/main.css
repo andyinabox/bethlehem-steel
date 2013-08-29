@@ -80,6 +80,27 @@ p {
 	background-position: center center;
 }
 
+#scrollDownWrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	/*width: 160px;*/
+	height: 360px;
+/*	margin: 15% auto;
+*/	text-align: center;
+	/*position: relative;*/
+	padding-top: 160px;	
+}
+
+#scrollDownWrapper .prompt {
+	width: 160px;
+	margin: 15% auto;
+	color: #555;
+	font-size: 11px;
+	text-transform: uppercase;	
+}
+
 #loading {
 	position: fixed;
 	width: 100%;
@@ -89,6 +110,40 @@ p {
 	color: #ddd;
 	z-index: 9999;
 }
+
+#loaderWrapper {
+	width: 160px;
+	height: 360px;
+	margin: 15% auto;
+	text-align: center;
+	position: relative;
+	padding-top: 160px;
+}
+
+.loadingSpinner {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#loadingMessage {
+	color: #555;
+	font-size: 11px;
+	text-transform: uppercase;
+}
+#loadingMessage .loadingHeader {
+	border-bottom: 1px solid #333;
+}
+
+
+#loadingMessage .loadingImages,
+#loadingMessage .loadingSounds,
+#loadingMessage .loadingVideos {
+	border-bottom: 1px dotted #333;
+	display: none;
+
+}
+
 
 #content {
 	/*display: none;*/
@@ -139,6 +194,8 @@ p {
 	height:1000px;
 	background-position: center 0px;
 }
+
+
 
 /**
  * DEV MODE
