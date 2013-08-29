@@ -1,8 +1,8 @@
 define({
 	// "mediaRoot" : "http://dl.dropboxusercontent.com/u/2100102/bethlehem/",
 	// "mediaRoot" : "https://s3.amazonaws.com/bethlehem/",
-	"mediaRoot" : "http://bethlehem.s3-website-us-east-1.amazonaws.com/",
-	// "mediaRoot" : "../localMedia/",
+	// "mediaRoot" : "http://bethlehem.s3-website-us-east-1.amazonaws.com/",
+	"mediaRoot" : "../localMedia/",
 	"sounds" : {
 		"Richie_WelfareRoom" : "sounds/Richie_WelfareRoom.mp3",
 		"Strike_Story" : "sounds/Strike_Story.mp3",
