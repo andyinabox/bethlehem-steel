@@ -38,6 +38,7 @@ define([
 				skrollrMedia.init(_skrollr, {}, _m);
 
 				// $('#content').show();
+				$('#content').show();
 				$('#fastSpinner').hide();
 				$('#slowSpinner').show();
 				$('#loading').delay(200).fadeOut();
