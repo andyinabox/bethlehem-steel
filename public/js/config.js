@@ -21,7 +21,8 @@ require.config({
         jquery: 'lib/jquery/jquery',
         lodash: 'lib/lodash/lodash',
         'mediator-js': 'lib/mediator-js/lib/mediator',
-        'skrollr': 'lib/skrollr/src/skrollr'
+        'skrollr': 'lib/skrollr/src/skrollr',
+        bowser: 'lib/bowser/bowser'
     },
     shim: {
     	'skrollr' : {

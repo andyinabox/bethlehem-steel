@@ -2,12 +2,13 @@ define([
 	'jquery',
 	'lodash',
 	'skrollr',
-	'mediator-js', 
+	'mediator-js',
+	'bowser',
 	'app/preloader',
 	'app/transitions',
 	'app/skrollr-media',
 	'app/dev'
-], function($, _, skrollr, mediator, preloader, transitions, skrollrMedia, dev) {
+], function($, _, skrollr, mediator, bowser, preloader, transitions, skrollrMedia, dev) {
 	var self = {},
 		_m = new Mediator(),
 		_skrollr,
@@ -17,34 +18,48 @@ define([
 
 		_devMode();
 
+		if(bowser.webkit) {
 
-		_registerTransitions(transitions);
-		_registerEvents(_m);
+			_registerTransitions(transitions);
+			_registerEvents(_m);
 
-		$(_onDomReady);
+			$(_onDomReady);
 
-		preloader.init({},_m).then(function(e){
+			preloader.init({},_m).then(function(e){
 
-			$('.fullscreen').height($(window).height());
 
-			_skrollr = skrollr.init();
-			dev.setSkrollr(_skrollr);
+				$('.fullscreen').height($(window).height());
 
-			transitions.init();
+				_skrollr = skrollr.init();
+				dev.setSkrollr(_skrollr);
 
-			skrollrMedia.init(_skrollr, {}, _m);
+				transitions.init();
 
-			// $('#content').show();
-			$('#fastSpinner').hide();
-			$('#slowSpinner').show();
-			$('#loading').delay(200).fadeOut();
+				skrollrMedia.init(_skrollr, {}, _m);
 
-		});	
+				// $('#content').show();
+				$('#fastSpinner').hide();
+				$('#slowSpinner').show();
+				$('#loading').delay(200).fadeOut();
 
+			});	
+
+		} else {
+			$(_showBrowserPrompt);
+		}
+
+	}
+
+	function _showBrowserPrompt() {
+
+			$('#content').hide();
+			$('#browser').show();
+			$('#loading').hide();		
 	}
 
 
 	function _onDomReady() {
+		$('#loading').fadeIn(300);
 		$loadingMessage = $('#loadingMessage');	
 	}
 
