@@ -1,0 +1,9 @@
+{
+  "name": "bowser",
+  "version": "0.0.0",
+  "commit": "20826d1ea5c9d26858ab83fc0b814b82844e75e3",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ded/bowser.git"
+  }
+}
