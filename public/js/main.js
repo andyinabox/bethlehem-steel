@@ -1,4 +1,6 @@
 requirejs.config({baseUrl : 'js/'});
 requirejs(['config'], function(c) { 
-	require(['app/app']);
+	require(['app/app'], function(app){
+		app.init();
+	});
 });
